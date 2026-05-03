@@ -30,10 +30,12 @@ const userSchema = new mongoose.Schema({
     },  
 });
 
+//** token ko hamne id se sign kiya hai to jab bhi ham token ko decode krenge to hame id hi milegi sirf
 userSchema.methods.generateAuthToken = function() {
-    const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
     return token;
 }
+
 
 userSchema.methods.comparePassword = async function(password) {
     return await bcrypt.compare(password, this.password);

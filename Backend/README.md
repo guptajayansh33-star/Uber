@@ -145,3 +145,98 @@ The request body should be in JSON format and include the following fields:
       "error": "string"
     }
     ```
+
+## Endpoint: `/user/profile`
+
+### Description
+This endpoint retrieves the authenticated user's profile information. It requires a valid JWT token for authentication.
+
+### Method
+`GET`
+
+### Authentication
+- **Required**: Yes
+- **Type**: JWT Token (in Authorization header or cookie)
+
+### Request Body
+No request body required.
+
+### Responses
+
+#### Success Response
+- **Status Code**: `200 OK`
+- **Body**:
+  ```json
+  {
+    "_id": "string",
+    "fullname": {
+      "firstname": "string",
+      "lastname": "string"
+    },
+    "email": "string"
+  }
+  ```
+
+#### Error Responses
+- **Status Code**: `401 Unauthorized`
+  - **Reason**: Missing or invalid authentication token.
+  - **Body**:
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+- **Status Code**: `500 Internal Server Error`
+  - **Reason**: Unexpected server error.
+  - **Body**:
+    ```json
+    {
+      "error": "string"
+    }
+    ```
+
+## Endpoint: `/user/logout`
+
+### Description
+This endpoint logs out the authenticated user by clearing the session cookie and blacklisting the JWT token to prevent further use.
+
+### Method
+`GET`
+
+### Authentication
+- **Required**: Yes
+- **Type**: JWT Token (in Authorization header or cookie)
+
+### Request Body
+No request body required.
+
+### Responses
+
+#### Success Response
+- **Status Code**: `200 OK`
+- **Body**:
+  ```json
+  {
+    "message": "Logged out successfully"
+  }
+  ```
+
+#### Error Responses
+- **Status Code**: `401 Unauthorized`
+  - **Reason**: Missing or invalid authentication token.
+  - **Body**:
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+- **Status Code**: `500 Internal Server Error`
+  - **Reason**: Unexpected server error.
+  - **Body**:
+    ```json
+    {
+      "error": "string"
+    }
+    ```
