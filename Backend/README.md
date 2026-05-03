@@ -70,18 +70,3 @@ The request body should be in JSON format and include the following fields:
       "error": "string"
     }
     ```
-
-### Example Request
-```bash
-curl -X POST \
-  -H "Content-Type: application/json" \
-  -d '{
-    "fullname": {
-      "firstname": "John",
-      "lastname": "Doe"
-    },
-    "email": "john.doe@example.com",
-    "password": "password123"
-  }' \
-  http://localhost:3000/user/register
-```
