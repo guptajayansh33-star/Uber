@@ -70,3 +70,78 @@ The request body should be in JSON format and include the following fields:
       "error": "string"
     }
     ```
+
+## Endpoint: `/user/login`
+
+### Description
+This endpoint is used to authenticate a user. It validates the input data, checks the credentials, and returns a JSON Web Token (JWT) along with the user details upon successful authentication.
+
+### Method
+`POST`
+
+### Request Body
+The request body should be in JSON format and include the following fields:
+
+```json
+{
+  "email": "string (required, valid email format)",
+  "password": "string (required, min 6 characters)"
+}
+```
+
+### Validation Rules
+- `email`: Must be a valid email address.
+- `password`: Must be at least 6 characters long.
+
+### Responses
+
+#### Success Response
+- **Status Code**: `200 OK`
+- **Body**:
+  ```json
+  {
+    "token": "string (JWT token)",
+    "user": {
+      "_id": "string",
+      "fullname": {
+        "firstname": "string",
+        "lastname": "string"
+      },
+      "email": "string"
+    }
+  }
+  ```
+
+#### Error Responses
+- **Status Code**: `400 Bad Request`
+  - **Reason**: Validation errors in the input data.
+  - **Body**:
+    ```json
+    {
+      "errors": [
+        {
+          "msg": "string",
+          "param": "string",
+          "location": "string"
+        }
+      ]
+    }
+    ```
+
+- **Status Code**: `401 Unauthorized`
+  - **Reason**: Invalid email or password.
+  - **Body**:
+    ```json
+    {
+      "message": "Invalid email or password"
+    }
+    ```
+
+- **Status Code**: `500 Internal Server Error`
+  - **Reason**: Unexpected server error.
+  - **Body**:
+    ```json
+    {
+      "error": "string"
+    }
+    ```
